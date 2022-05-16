@@ -1,7 +1,6 @@
 #!/bin/bash
 
-COMMIT_MESSAGE=$1
-HAS_REF=$2
+COMMIT_MESSAGE=$INPUT_GITHUB_COMMIT
 COMMIT_TYPES=("build" "chore" "ci" "docs" "feat" "fix" "perf" "refactor" "revert" "style" "test")
 
 SET_COMMIT_TYPE=$(echo $COMMIT_MESSAGE | sed 's/:.*//')

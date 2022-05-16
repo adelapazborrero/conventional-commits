@@ -1,10 +1,15 @@
-name: 'Verify conventional commit'
-description: 'Check that last commit follows the conventional commit rules'
-inputs: 
-  github_commit:
-      required: true
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.github_commit }}
+2 name: 'Verify conventional commit'
+3 description: 'Check that last commit follows the conventional commit rules'
+4 inputs:
+5   github_commit:
+6     description: 'latest github commit'
+7     required: true
+8     default: ''
+9 outputs:
+10   test_result:
+11     description: 'Result of the tests'
+12 runs:
+13   using: 'docker'
+14   image: 'Dockerfile'
+15   args:
+16     - ${{ inputs.github_commit }}
