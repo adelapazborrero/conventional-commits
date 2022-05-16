@@ -6,17 +6,19 @@ COMMIT_TYPES=("build" "chore" "ci" "docs" "feat" "fix" "perf" "refactor" "revert
 SET_COMMIT_TYPE=$(echo $COMMIT_MESSAGE | sed 's/:.*//')
 COMMIT_SCOPE=$(echo "$SET_COMMIT_TYPE" | sed -n 's/.*\(([^()]*)\).*/\1/p')
 FIRST_LINE=$(echo ${COMMIT_MESSAGE%%$'\n'*})
+SIZE=${#FIRST_LINE} 
 
 CLEAN_TYPE=$(echo ${SET_COMMIT_TYPE%"("*})
 CLEAN_TYPE=$(echo ${CLEAN_TYPE%"!"*})
+CLEAN_TYPE=$(echo "$CLEAN_TYPE" | tr -d '"')
 
 if [[ -z $COMMIT_MESSAGE ]]; then
   echo "No commit message"
 
 # echo in case commit message is correct 
 elif [[ " ${COMMIT_TYPES[*]} " =~ " ${CLEAN_TYPE} " ]]; then
-  if [[ "$FIRST_LINE" -gt 72 ]]; then
-    echo "❌ Commit message should have lines of less than 72 characters, current length is $LONGEST_LINE"
+  if [[ $SIZE -gt 72 ]]; then
+    echo "❌ Commit message should have lines of less than 72 characters, current length is $SIZE"
     exit 1
   fi
 
