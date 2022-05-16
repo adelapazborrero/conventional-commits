@@ -15,7 +15,7 @@ if [[ -z $COMMIT_MESSAGE ]]; then
 
 # echo in case commit message is correct 
 elif [[ " ${COMMIT_TYPES[*]} " =~ " ${CLEAN_TYPE} " ]]; then
-  if [[ $FIRST_LINE -gt 72 ]]; then
+  if [[ "$FIRST_LINE" -gt 72 ]]; then
     echo "❌ Commit message should have lines of less than 72 characters, current length is $LONGEST_LINE"
     exit 1
   fi
