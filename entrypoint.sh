@@ -1,12 +1,12 @@
 #!/bin/bash
 
 COMMIT_MESSAGE="${INPUT_GITHUB_COMMIT}"
+COMMIT_TITLE="${INPUT_COMMIT_TITLE}"
 COMMIT_TYPES=("build" "chore" "ci" "docs" "feat" "fix" "perf" "refactor" "revert" "style" "test")
 
 SET_COMMIT_TYPE=$(echo $COMMIT_MESSAGE | sed 's/:.*//')
 COMMIT_SCOPE=$(echo "$SET_COMMIT_TYPE" | sed -n 's/.*\(([^()]*)\).*/\1/p')
-FIRST_LINE=$(echo ${COMMIT_MESSAGE%%$'\n'*})
-SIZE=${#FIRST_LINE} 
+SIZE=${#COMMIT_TITLE} 
 
 CLEAN_TYPE=$(echo ${SET_COMMIT_TYPE%"("*})
 CLEAN_TYPE=$(echo ${CLEAN_TYPE%"!"*})

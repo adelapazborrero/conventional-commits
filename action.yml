@@ -4,6 +4,9 @@ inputs:
   github_commit:
     description: 'latest github commit'
     required: true
+  commit_title:
+    description: 'title of latest commit'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
