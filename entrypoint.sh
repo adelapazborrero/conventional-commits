@@ -1,16 +1,15 @@
 #!/bin/bash
 
-COMMIT_MESSAGE="${INPUT_GITHUB_COMMIT}"
-COMMIT_TITLE="${INPUT_COMMIT_TITLE}"
+COMMIT_MESSAGE=$1
+COMMIT_TITLE=$2
 COMMIT_TYPES=("build" "chore" "ci" "docs" "feat" "fix" "perf" "refactor" "revert" "style" "test")
 
 SET_COMMIT_TYPE=$(echo $COMMIT_MESSAGE | sed 's/:.*//')
 COMMIT_SCOPE=$(echo "$SET_COMMIT_TYPE" | sed -n 's/.*\(([^()]*)\).*/\1/p')
-SIZE=${#COMMIT_TITLE} 
+SIZE=${#COMMIT_TITLE}
 
 CLEAN_TYPE=$(echo ${SET_COMMIT_TYPE%"("*})
 CLEAN_TYPE=$(echo ${CLEAN_TYPE%"!"*})
-CLEAN_TYPE=$(echo "$CLEAN_TYPE" | tr -d '"')
 
 if [[ -z $COMMIT_MESSAGE ]]; then
   echo "No commit message"
@@ -36,7 +35,7 @@ elif [[ " ${COMMIT_TYPES[*]} " =~ " ${CLEAN_TYPE} " ]]; then
     echo "   Scope: $COMMIT_SCOPE"
   fi
 
-  if [[  " $COMMIT_MESSAGE " != *"refs: "* ]]; then
+  if [[  " $COMMIT_MESSAGE " != *"Refs: "* ]]; then
     echo -e "\e[3m☉ Commit message does not contain a reference\e[0m"
   fi
 
